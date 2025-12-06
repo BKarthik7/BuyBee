@@ -23,11 +23,11 @@ if (ENV.NODE_ENV === 'production') {
     });
 }
 
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
-    connectDB();
-}, (err) => {
-    if (err) {
-        console.error('Error starting server:', err);
-    }
-});
+const startServer = async () => {
+    await connectDB();
+    app.listen(ENV.PORT, () => {
+        console.log(`Server running in ${ENV.NODE_ENV} mode`);
+    });
+}
+
+startServer();
